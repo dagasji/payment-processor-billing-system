@@ -10,7 +10,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-@ComponentScan(basePackages = { "es.danielgaspar.ppbs", "es.danielgaspar.ppbs.api" , "es.danielgaspar.ppbs.config"})
+@ComponentScan(basePackages = { "es.danielgaspar.ppbs", "es.danielgaspar.ppbs.api" , "es.danielgaspar.ppbs.config", "es.danielgaspar.ppbs.entity", "es.danielgaspar.ppbs.repository"})
 public class Swagger2SpringBoot implements CommandLineRunner {
 
     @Override

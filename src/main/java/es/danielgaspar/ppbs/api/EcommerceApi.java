@@ -23,14 +23,14 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-02T09:05:00.503+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-03T12:17:41.594+01:00")
 
 @Validated
 @Api(value = "ecommerce", description = "the ecommerce API")
 @RequestMapping(value = "")
 public interface EcommerceApi {
 
-    @ApiOperation(value = "create new ecommerce", nickname = "createEcommerce", notes = "", response = EcommerceDetail.class, tags={ "ecommerce", })
+    @ApiOperation(value = "Create new ecommerce", nickname = "createEcommerce", notes = "", response = EcommerceDetail.class, tags={ "ecommerce", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = EcommerceDetail.class),
         @ApiResponse(code = 201, message = "Created"),
@@ -38,7 +38,7 @@ public interface EcommerceApi {
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
     @RequestMapping(value = "/ecommerce",
-        produces = { "*/*" }, 
+        produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
     ResponseEntity<EcommerceDetail> createEcommerce(@ApiParam(value = "Body request" ,required=true )  @Valid @RequestBody Ecommerce body);
@@ -51,21 +51,22 @@ public interface EcommerceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden") })
     @RequestMapping(value = "/ecommerce/{id}",
-        produces = { "*/*" }, 
+        produces = { "application/json" }, 
         method = RequestMethod.DELETE)
-    ResponseEntity<EcommerceDetail> deleteEcommerce(@ApiParam(value = "id",required=true) @PathVariable("id") String id);
+    ResponseEntity<EcommerceDetail> deleteEcommerce(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id);
 
 
     @ApiOperation(value = "Get ecommerce detail", nickname = "getEcommerce", notes = "", response = EcommerceDetail.class, tags={ "ecommerce", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = EcommerceDetail.class),
+        @ApiResponse(code = 204, message = "No Content"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
     @RequestMapping(value = "/ecommerce/{id}",
-        produces = { "*/*" }, 
+        produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<EcommerceDetail> getEcommerce();
+    ResponseEntity<EcommerceDetail> getEcommerce(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id);
 
 
     @ApiOperation(value = "Report monthly settlement Ecommerce", nickname = "reportEcommerce", notes = "", response = EcommerceReport.class, tags={ "ecommerce", })
@@ -90,9 +91,9 @@ public interface EcommerceApi {
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
     @RequestMapping(value = "/ecommerce/{id}",
-        produces = { "*/*" }, 
+        produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<EcommerceDetail> updateEcommerce(@ApiParam(value = "Body request" ,required=true )  @Valid @RequestBody Ecommerce body);
+    ResponseEntity<EcommerceDetail> updateEcommerce(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id,@ApiParam(value = "Body request" ,required=true )  @Valid @RequestBody Ecommerce body);
 
 }

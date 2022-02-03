@@ -1,12 +1,16 @@
 package es.danielgaspar.ppbs.api;
 
+import es.danielgaspar.ppbs.entity.PaymentProcessorEntity;
 import es.danielgaspar.ppbs.model.EcommerceReport;
 import es.danielgaspar.ppbs.model.PaymentProcessor;
 import es.danielgaspar.ppbs.model.PaymentProcessorDetail;
+import es.danielgaspar.ppbs.repositoy.PaymentProcessorRepository;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,7 +26,7 @@ import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-02T09:05:00.503+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-02T18:48:24.627+01:00")
 
 @Controller
 public class PaymentprocessorApiController implements PaymentprocessorApi {
@@ -32,6 +36,9 @@ public class PaymentprocessorApiController implements PaymentprocessorApi {
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
+    
+    @Autowired
+    private PaymentProcessorRepository repo;
 
     @org.springframework.beans.factory.annotation.Autowired
     public PaymentprocessorApiController(ObjectMapper objectMapper, HttpServletRequest request) {
@@ -67,16 +74,10 @@ public class PaymentprocessorApiController implements PaymentprocessorApi {
         return new ResponseEntity<PaymentProcessorDetail>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<PaymentProcessorDetail> getPaymentProcessor() {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("")) {
-            try {
-                return new ResponseEntity<PaymentProcessorDetail>(objectMapper.readValue("", PaymentProcessorDetail.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type ", e);
-                return new ResponseEntity<PaymentProcessorDetail>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
+    public ResponseEntity<PaymentProcessorDetail> getPaymentProcessor(@ApiParam(value = "id",required=true) @PathVariable("id") String id) {
+        
+    	PaymentProcessorEntity entity = repo.findOne(Integer.parseInt(id));
+    	
 
         return new ResponseEntity<PaymentProcessorDetail>(HttpStatus.NOT_IMPLEMENTED);
     }

@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * EcommerceReport
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-02T09:05:00.503+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-03T11:30:25.428+01:00")
 
 
 public class EcommerceReport   {
@@ -21,7 +21,7 @@ public class EcommerceReport   {
   private String ecommerceName = null;
 
   @JsonProperty("month")
-  private String month = null;
+  private Integer month = null;
 
   @JsonProperty("paymentProcessorName")
   private String paymentProcessorName = null;
@@ -46,7 +46,7 @@ public class EcommerceReport   {
     this.ecommerceName = ecommerceName;
   }
 
-  public EcommerceReport month(String month) {
+  public EcommerceReport month(Integer month) {
     this.month = month;
     return this;
   }
@@ -58,11 +58,11 @@ public class EcommerceReport   {
   @ApiModelProperty(value = "Month")
 
 
-  public String getMonth() {
+  public Integer getMonth() {
     return month;
   }
 
-  public void setMonth(String month) {
+  public void setMonth(Integer month) {
     this.month = month;
   }
 

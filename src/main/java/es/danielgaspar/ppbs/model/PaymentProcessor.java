@@ -3,8 +3,11 @@ package es.danielgaspar.ppbs.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import es.danielgaspar.ppbs.model.APP;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -14,7 +17,7 @@ import javax.validation.constraints.*;
  */
 @ApiModel(description = "This is Payment Processor model")
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-02T09:05:00.503+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-03T11:30:25.428+01:00")
 
 
 public class PaymentProcessor   {
@@ -23,6 +26,10 @@ public class PaymentProcessor   {
 
   @JsonProperty("flatfee")
   private String flatfee = null;
+
+  @JsonProperty("listAPP")
+  @Valid
+  private List<APP> listAPP = null;
 
   public PaymentProcessor name(String name) {
     this.name = name;
@@ -65,6 +72,35 @@ public class PaymentProcessor   {
     this.flatfee = flatfee;
   }
 
+  public PaymentProcessor listAPP(List<APP> listAPP) {
+    this.listAPP = listAPP;
+    return this;
+  }
+
+  public PaymentProcessor addListAPPItem(APP listAPPItem) {
+    if (this.listAPP == null) {
+      this.listAPP = new ArrayList<APP>();
+    }
+    this.listAPP.add(listAPPItem);
+    return this;
+  }
+
+  /**
+   * Get listAPP
+   * @return listAPP
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public List<APP> getListAPP() {
+    return listAPP;
+  }
+
+  public void setListAPP(List<APP> listAPP) {
+    this.listAPP = listAPP;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -76,12 +112,13 @@ public class PaymentProcessor   {
     }
     PaymentProcessor paymentProcessor = (PaymentProcessor) o;
     return Objects.equals(this.name, paymentProcessor.name) &&
-        Objects.equals(this.flatfee, paymentProcessor.flatfee);
+        Objects.equals(this.flatfee, paymentProcessor.flatfee) &&
+        Objects.equals(this.listAPP, paymentProcessor.listAPP);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, flatfee);
+    return Objects.hash(name, flatfee, listAPP);
   }
 
   @Override
@@ -91,6 +128,7 @@ public class PaymentProcessor   {
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    flatfee: ").append(toIndentedString(flatfee)).append("\n");
+    sb.append("    listAPP: ").append(toIndentedString(listAPP)).append("\n");
     sb.append("}");
     return sb.toString();
   }

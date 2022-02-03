@@ -14,17 +14,20 @@ import javax.validation.constraints.*;
  */
 @ApiModel(description = "This is ecommerce model")
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-02T09:05:00.503+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-03T11:32:46.718+01:00")
 
 
 public class EcommerceDetail   {
   @JsonProperty("id")
-  private String id = null;
+  private Integer id = null;
 
   @JsonProperty("name")
   private String name = null;
 
-  public EcommerceDetail id(String id) {
+  @JsonProperty("idPaymentProcessor")
+  private Integer idPaymentProcessor = null;
+
+  public EcommerceDetail id(Integer id) {
     this.id = id;
     return this;
   }
@@ -36,11 +39,11 @@ public class EcommerceDetail   {
   @ApiModelProperty(value = "Ecommerce Id")
 
 
-  public String getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -65,6 +68,26 @@ public class EcommerceDetail   {
     this.name = name;
   }
 
+  public EcommerceDetail idPaymentProcessor(Integer idPaymentProcessor) {
+    this.idPaymentProcessor = idPaymentProcessor;
+    return this;
+  }
+
+  /**
+   * Payment Processor
+   * @return idPaymentProcessor
+  **/
+  @ApiModelProperty(value = "Payment Processor")
+
+
+  public Integer getIdPaymentProcessor() {
+    return idPaymentProcessor;
+  }
+
+  public void setIdPaymentProcessor(Integer idPaymentProcessor) {
+    this.idPaymentProcessor = idPaymentProcessor;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -76,12 +99,13 @@ public class EcommerceDetail   {
     }
     EcommerceDetail ecommerceDetail = (EcommerceDetail) o;
     return Objects.equals(this.id, ecommerceDetail.id) &&
-        Objects.equals(this.name, ecommerceDetail.name);
+        Objects.equals(this.name, ecommerceDetail.name) &&
+        Objects.equals(this.idPaymentProcessor, ecommerceDetail.idPaymentProcessor);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(id, name, idPaymentProcessor);
   }
 
   @Override
@@ -91,6 +115,7 @@ public class EcommerceDetail   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    idPaymentProcessor: ").append(toIndentedString(idPaymentProcessor)).append("\n");
     sb.append("}");
     return sb.toString();
   }

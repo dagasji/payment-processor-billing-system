@@ -14,12 +14,15 @@ import javax.validation.constraints.*;
  */
 @ApiModel(description = "This is ecommerce model")
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-02T09:05:00.503+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-03T11:30:25.428+01:00")
 
 
 public class Ecommerce   {
   @JsonProperty("name")
   private String name = null;
+
+  @JsonProperty("idPaymentProcessor")
+  private Integer idPaymentProcessor = null;
 
   public Ecommerce name(String name) {
     this.name = name;
@@ -42,6 +45,26 @@ public class Ecommerce   {
     this.name = name;
   }
 
+  public Ecommerce idPaymentProcessor(Integer idPaymentProcessor) {
+    this.idPaymentProcessor = idPaymentProcessor;
+    return this;
+  }
+
+  /**
+   * Payment Processor
+   * @return idPaymentProcessor
+  **/
+  @ApiModelProperty(value = "Payment Processor")
+
+
+  public Integer getIdPaymentProcessor() {
+    return idPaymentProcessor;
+  }
+
+  public void setIdPaymentProcessor(Integer idPaymentProcessor) {
+    this.idPaymentProcessor = idPaymentProcessor;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -52,12 +75,13 @@ public class Ecommerce   {
       return false;
     }
     Ecommerce ecommerce = (Ecommerce) o;
-    return Objects.equals(this.name, ecommerce.name);
+    return Objects.equals(this.name, ecommerce.name) &&
+        Objects.equals(this.idPaymentProcessor, ecommerce.idPaymentProcessor);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name);
+    return Objects.hash(name, idPaymentProcessor);
   }
 
   @Override
@@ -66,6 +90,7 @@ public class Ecommerce   {
     sb.append("class Ecommerce {\n");
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    idPaymentProcessor: ").append(toIndentedString(idPaymentProcessor)).append("\n");
     sb.append("}");
     return sb.toString();
   }
