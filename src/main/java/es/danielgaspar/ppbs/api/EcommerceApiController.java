@@ -54,61 +54,56 @@ public class EcommerceApiController implements EcommerceApi {
      * Create new ecommerce entity
      */
     public ResponseEntity<EcommerceDetail> createEcommerce(@ApiParam(value = "Body request" ,required=true )  @Valid @RequestBody Ecommerce body) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
             
-        	//Parse Ecommerce to EcommerceDetail
-        	EcommerceDetail detail = new EcommerceDetail();
-        	detail.setName(body.getName());
-        	detail.setIdPaymentProcessor(body.getIdPaymentProcessor());
-        	
-        	//Call service
-        	detail = service.create(detail);   
-        	return new ResponseEntity<EcommerceDetail>(detail, HttpStatus.OK);       
-        	
-        }
-
-        return new ResponseEntity<EcommerceDetail>(HttpStatus.NOT_IMPLEMENTED);
+    	//Parse Ecommerce to EcommerceDetail
+    	EcommerceDetail detail = new EcommerceDetail();
+    	detail.setName(body.getName());
+    	detail.setIdPaymentProcessor(body.getIdPaymentProcessor());
+    	
+    	//Call service
+    	detail = service.create(detail);   
+    	return new ResponseEntity<EcommerceDetail>(detail, HttpStatus.OK);       
+        
     }
 
     /**
      * Delete existing ecommerce
      */
     public ResponseEntity<EcommerceDetail> deleteEcommerce(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("")) {
         	
-        	EcommerceDetail response = service.delete(id);
-        	
-        	if (response != null) {
-        		return new ResponseEntity<EcommerceDetail>(response, HttpStatus.OK);
-        	} else {
-        		return new ResponseEntity<EcommerceDetail>(HttpStatus.NO_CONTENT);
-        	}
-        }
-
-        return new ResponseEntity<EcommerceDetail>(HttpStatus.NOT_IMPLEMENTED);
+    	EcommerceDetail response = service.delete(id);
+    	
+    	if (response != null) {
+    		return new ResponseEntity<EcommerceDetail>(response, HttpStatus.OK);
+    	} else {
+    		return new ResponseEntity<EcommerceDetail>(HttpStatus.NO_CONTENT);
+    	}
     }
 
+    /**
+     * Get all ecommerce
+     */
+    public ResponseEntity<List<EcommerceDetail>> getAllEcommerce() {
+            
+    	List<EcommerceDetail> response = service.findAll();
+    	return new ResponseEntity<List<EcommerceDetail>>(response, HttpStatus.OK);
+
+    }
+    
     /**
      * Get existing Ecommerce
      * 
      */
     public ResponseEntity<EcommerceDetail> getEcommerce(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id) {
-        String accept = request.getHeader("Accept");
-        
-        if (accept != null && accept.contains("application/json")) {
-        	EcommerceDetail response = service.findById(id);
-            	
-        	if (response != null) {
-        		return new ResponseEntity<EcommerceDetail>(response, HttpStatus.OK);
-        	} else {
-        		return new ResponseEntity<EcommerceDetail>(HttpStatus.NO_CONTENT);
-        	}
-            
-        }
-
-        return new ResponseEntity<EcommerceDetail>(HttpStatus.NOT_IMPLEMENTED);
+       
+    	EcommerceDetail response = service.findById(id);
+        	
+    	if (response != null) {
+    		return new ResponseEntity<EcommerceDetail>(response, HttpStatus.OK);
+    	} else {
+    		return new ResponseEntity<EcommerceDetail>(HttpStatus.NO_CONTENT);
+    	}            
+       
     }
 
     
@@ -127,28 +122,23 @@ public class EcommerceApiController implements EcommerceApi {
      * Update existing Ecommerce
      */
     public ResponseEntity<EcommerceDetail> updateEcommerce(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id,@ApiParam(value = "Body request" ,required=true )  @Valid @RequestBody Ecommerce body) {
-        
-    	String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("")) {
         	
-        	//Parse Ecommerce to EcommerceDetail
-        	EcommerceDetail detail = new EcommerceDetail();
-        	detail.setId(id);
-        	detail.setName(body.getName());
-        	detail.setIdPaymentProcessor(body.getIdPaymentProcessor());
-        	        	
-        	//Call service
-        	EcommerceDetail response= service.update(detail);   
+    	//Parse Ecommerce to EcommerceDetail
+    	EcommerceDetail detail = new EcommerceDetail();
+    	detail.setId(id);
+    	detail.setName(body.getName());
+    	detail.setIdPaymentProcessor(body.getIdPaymentProcessor());
+    	        	
+    	//Call service
+    	EcommerceDetail response= service.update(detail);   
+    	
+    	if (response != null) {
+    		return new ResponseEntity<EcommerceDetail>(response, HttpStatus.OK);
+    	} else {
+    		return new ResponseEntity<EcommerceDetail>(HttpStatus.NO_CONTENT);
+    	}
         	
-        	if (response != null) {
-        		return new ResponseEntity<EcommerceDetail>(response, HttpStatus.OK);
-        	} else {
-        		return new ResponseEntity<EcommerceDetail>(HttpStatus.NO_CONTENT);
-        	}
-        	
-        }
 
-        return new ResponseEntity<EcommerceDetail>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 }

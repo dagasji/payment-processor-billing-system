@@ -54,7 +54,19 @@ public interface EcommerceApi {
         produces = { "application/json" }, 
         method = RequestMethod.DELETE)
     ResponseEntity<EcommerceDetail> deleteEcommerce(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id);
-
+    
+    
+    @ApiOperation(value = "Get all ecommerce", nickname = "getAllEcommerce", notes = "", response = EcommerceDetail.class, responseContainer = "List", tags={ "ecommerce", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = EcommerceDetail.class, responseContainer = "List"),
+        @ApiResponse(code = 204, message = "No Content"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/ecommerce",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    ResponseEntity<List<EcommerceDetail>> getAllEcommerce();
 
     @ApiOperation(value = "Get ecommerce detail", nickname = "getEcommerce", notes = "", response = EcommerceDetail.class, tags={ "ecommerce", })
     @ApiResponses(value = { 

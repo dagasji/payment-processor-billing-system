@@ -1,5 +1,6 @@
 package es.danielgaspar.ppbs.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -34,8 +35,21 @@ public class EcommerceServiceImpl extends GeneralServiceImpl<EcommerceEntity, Ec
 
 	@Override
 	protected List<EcommerceDetail> listEntityToModel(List<EcommerceEntity> listEntity) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<EcommerceDetail> listEcomerceModel = null;
+		
+		if (listEntity != null) {
+			
+			listEcomerceModel = new ArrayList<EcommerceDetail>();
+		
+			for (EcommerceEntity ecommerceEntity : listEntity) {
+				
+				listEcomerceModel.add(entityToModel(ecommerceEntity));
+			}
+		
+		}
+		
+		return listEcomerceModel;
 	}
 
 	@Override
@@ -47,9 +61,11 @@ public class EcommerceServiceImpl extends GeneralServiceImpl<EcommerceEntity, Ec
 			entity.setId(model.getId());
 			entity.setName(model.getName());
 			
-			PaymentProcessorEntity paymentProcessor = new PaymentProcessorEntity();
-			paymentProcessor.setId(model.getIdPaymentProcessor());
-			entity.setPaymentProcessor(paymentProcessor);
+			if (model.getIdPaymentProcessor() != null) {
+				PaymentProcessorEntity paymentProcessor = new PaymentProcessorEntity();
+				paymentProcessor.setId(model.getIdPaymentProcessor());
+				entity.setPaymentProcessor(paymentProcessor);
+			}
 		}
 
 		return entity;
