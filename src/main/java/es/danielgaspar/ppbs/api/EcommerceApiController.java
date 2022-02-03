@@ -1,12 +1,10 @@
 package es.danielgaspar.ppbs.api;
 
-import es.danielgaspar.ppbs.model.Ecommerce;
-import es.danielgaspar.ppbs.model.EcommerceDetail;
-import es.danielgaspar.ppbs.model.EcommerceReport;
-import es.danielgaspar.ppbs.service.EcommerceService;
+import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.annotations.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +13,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import es.danielgaspar.ppbs.model.Ecommerce;
+import es.danielgaspar.ppbs.model.EcommerceDetail;
+import es.danielgaspar.ppbs.model.EcommerceReport;
+import es.danielgaspar.ppbs.model.Payment;
+import es.danielgaspar.ppbs.service.EcommerceService;
+import io.swagger.annotations.ApiParam;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-03T09:47:42.868+01:00")
 
 /**
@@ -64,6 +61,19 @@ public class EcommerceApiController implements EcommerceApi {
     	detail = service.create(detail);   
     	return new ResponseEntity<EcommerceDetail>(detail, HttpStatus.OK);       
         
+    }
+    
+    public ResponseEntity<Void> createPayment(@ApiParam(value = "id ecommerce",required=true) @PathVariable("id") Integer id,@ApiParam(value = "Body request" ,required=true )  @Valid @RequestBody Payment body) {
+        
+    	try {
+    		service.createPayment(id, body);
+    	
+    	}catch (Exception e) {
+    		log.error("Error in createPayment()", e);
+    		return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+    	}
+    	
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     /**

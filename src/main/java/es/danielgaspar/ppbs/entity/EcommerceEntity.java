@@ -13,11 +13,29 @@ import javax.persistence.Table;
 @Table(name="ECOMMERCE")
 public class EcommerceEntity {
 	
+	public EcommerceEntity() {
+		super();
+	}
+
+
+	public EcommerceEntity(Integer id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_ECOMMERCE")
 	private Integer id;
 	
+
+	public EcommerceEntity(Integer id) {
+		super();
+		this.id = id;
+	}
+
 
 	@Column(name="NAME")
 	private String name;

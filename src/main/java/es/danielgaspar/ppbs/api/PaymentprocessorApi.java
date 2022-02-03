@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-02T18:48:24.627+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-03T16:56:52.396+01:00")
 
 @Validated
 @Api(value = "paymentprocessor", description = "the paymentprocessor API")
@@ -38,7 +38,7 @@ public interface PaymentprocessorApi {
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
     @RequestMapping(value = "/paymentprocessor",
-        produces = { "*/*" }, 
+        produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
     ResponseEntity<PaymentProcessorDetail> createPaymentProcessor(@ApiParam(value = "Body request" ,required=true )  @Valid @RequestBody PaymentProcessor body);
@@ -51,9 +51,9 @@ public interface PaymentprocessorApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden") })
     @RequestMapping(value = "/paymentprocessor/{id}",
-        produces = { "*/*" }, 
+        produces = { "application/json" }, 
         method = RequestMethod.DELETE)
-    ResponseEntity<PaymentProcessorDetail> deletePaymentProcessor(@ApiParam(value = "id",required=true) @PathVariable("id") String id);
+    ResponseEntity<PaymentProcessorDetail> deletePaymentProcessor(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id);
 
 
     @ApiOperation(value = "Get Payment Processor detail", nickname = "getPaymentProcessor", notes = "", response = PaymentProcessorDetail.class, tags={ "Payment Processor", })
@@ -63,9 +63,9 @@ public interface PaymentprocessorApi {
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
     @RequestMapping(value = "/paymentprocessor/{id}",
-        produces = { "*/*" }, 
+        produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<PaymentProcessorDetail> getPaymentProcessor(@ApiParam(value = "id",required=true) @PathVariable("id") String id);
+    ResponseEntity<PaymentProcessorDetail> getPaymentProcessor(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id);
 
 
     @ApiOperation(value = "Report monthly", nickname = "reportPaymentProcessor", notes = "", response = EcommerceReport.class, tags={ "Payment Processor", })
@@ -76,7 +76,7 @@ public interface PaymentprocessorApi {
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
     @RequestMapping(value = "/paymentprocessor/{id}/report",
-        produces = { "*/*" }, 
+        produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.GET)
     ResponseEntity<EcommerceReport> reportPaymentProcessor(@ApiParam(value = "id",required=true) @PathVariable("id") String id);
@@ -90,9 +90,9 @@ public interface PaymentprocessorApi {
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
     @RequestMapping(value = "/paymentprocessor/{id}",
-        produces = { "*/*" }, 
+        produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<PaymentProcessorDetail> updatePaymentProcessor(@ApiParam(value = "Body request" ,required=true )  @Valid @RequestBody PaymentProcessor body);
+    ResponseEntity<PaymentProcessorDetail> updatePaymentProcessor(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id,@ApiParam(value = "Body request" ,required=true )  @Valid @RequestBody PaymentProcessor body);
 
 }

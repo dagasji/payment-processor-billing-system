@@ -15,6 +15,16 @@ import javax.persistence.Table;
 @Table(name="PAYMENT_PROCESSOR")
 public class PaymentProcessorEntity {
 	
+	public PaymentProcessorEntity() { 
+		super();
+	}
+	
+	public PaymentProcessorEntity(Integer id) {
+		super();
+		this.id = id;
+	}
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_PAYMENT_PROCESSOR")
@@ -43,5 +53,36 @@ public class PaymentProcessorEntity {
 		this.id = id;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getFlatfee() {
+		return flatfee;
+	}
+
+	public void setFlatfee(String flatfee) {
+		this.flatfee = flatfee;
+	}
+
+	public List<EcommerceEntity> getListEntity() {
+		return listEntity;
+	}
+
+	public void setListEntity(List<EcommerceEntity> listEntity) {
+		this.listEntity = listEntity;
+	}
+
+	public List<AcquirerPlusPricingEntity> getListApp() {
+		return listApp;
+	}
+
+	public void setListApp(List<AcquirerPlusPricingEntity> listApp) {
+		this.listApp = listApp;
+	}
 
 }

@@ -5,24 +5,26 @@
  */
 package es.danielgaspar.ppbs.api;
 
-import es.danielgaspar.ppbs.model.Ecommerce;
-import es.danielgaspar.ppbs.model.EcommerceDetail;
-import es.danielgaspar.ppbs.model.EcommerceReport;
-import io.swagger.annotations.*;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
-import javax.validation.constraints.*;
-import java.util.List;
+import es.danielgaspar.ppbs.model.Ecommerce;
+import es.danielgaspar.ppbs.model.EcommerceDetail;
+import es.danielgaspar.ppbs.model.EcommerceReport;
+import es.danielgaspar.ppbs.model.Payment;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-03T12:17:41.594+01:00")
 
 @Validated
@@ -42,7 +44,20 @@ public interface EcommerceApi {
         consumes = { "application/json" },
         method = RequestMethod.POST)
     ResponseEntity<EcommerceDetail> createEcommerce(@ApiParam(value = "Body request" ,required=true )  @Valid @RequestBody Ecommerce body);
-
+    
+    @ApiOperation(value = "Create new payment link to the ecommerce", nickname = "createPayment", notes = "", tags={ "ecommerce", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK"),
+        @ApiResponse(code = 201, message = "Created"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/ecommerce/{id}/payment",
+        produces = { "application/json" }, 
+        consumes = { "application/json" },
+        method = RequestMethod.POST)
+    ResponseEntity<Void> createPayment(@ApiParam(value = "id ecommerce",required=true) @PathVariable("id") Integer id,@ApiParam(value = "Body request" ,required=true )  @Valid @RequestBody Payment body);
+    
 
     @ApiOperation(value = "Delete Ecommmerce", nickname = "deleteEcommerce", notes = "", response = EcommerceDetail.class, tags={ "ecommerce", })
     @ApiResponses(value = { 
