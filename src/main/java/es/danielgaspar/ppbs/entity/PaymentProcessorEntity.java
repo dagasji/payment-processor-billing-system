@@ -35,7 +35,7 @@ public class PaymentProcessorEntity {
 	private String name;
 	
 	@Column(name="FLAT_FEE")
-	private String flatfee;
+	private Float flatfee;
 	
 	@OneToMany(mappedBy = "paymentProcessor")
 	private List<EcommerceEntity> listEntity;
@@ -61,11 +61,11 @@ public class PaymentProcessorEntity {
 		this.name = name;
 	}
 
-	public String getFlatfee() {
+	public Float getFlatfee() {
 		return flatfee;
 	}
 
-	public void setFlatfee(String flatfee) {
+	public void setFlatfee(Float flatfee) {
 		this.flatfee = flatfee;
 	}
 

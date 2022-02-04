@@ -23,18 +23,18 @@ public class EcommerceEntity {
 		this.id = id;
 		this.name = name;
 	}
+	
+	public EcommerceEntity(Integer id) {
+		super();
+		this.id = id;
+	}
+
 
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_ECOMMERCE")
 	private Integer id;
-	
-
-	public EcommerceEntity(Integer id) {
-		super();
-		this.id = id;
-	}
 
 
 	@Column(name="NAME")

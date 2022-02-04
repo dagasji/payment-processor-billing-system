@@ -1,14 +1,21 @@
 package es.danielgaspar.ppbs.service;
 
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.danielgaspar.ppbs.entity.AcquirerPlusPricingEntity;
+import es.danielgaspar.ppbs.entity.EcommerceEntity;
+import es.danielgaspar.ppbs.entity.PaymentEntity;
 import es.danielgaspar.ppbs.entity.PaymentProcessorEntity;
 import es.danielgaspar.ppbs.model.APP;
+import es.danielgaspar.ppbs.model.EcommerceReport;
 import es.danielgaspar.ppbs.model.PaymentProcessorDetail;
 import es.danielgaspar.ppbs.repositoy.PaymentRepository;
 
@@ -90,6 +97,6 @@ public class PaymentProcessorServiceImpl extends GeneralServiceImpl<PaymentProce
 
 		return entity;
 	}
-
+	
 	
 }

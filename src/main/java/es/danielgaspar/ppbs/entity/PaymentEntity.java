@@ -1,5 +1,8 @@
 package es.danielgaspar.ppbs.entity;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +23,10 @@ public class PaymentEntity {
 
 	@Column(name="DESCRIPTION")
 	private String description;
-
+	
+	@Column(name="DATE")
+	private LocalDate date;
+	
 	@Column(name="amount")
 	private Double amount;	
 	
@@ -28,8 +34,27 @@ public class PaymentEntity {
 	@ManyToOne
 	@JoinColumn(name = "ID_ECOMMERCE")
 	private EcommerceEntity ecommerce;
+	
+	
+	public PaymentEntity() {
+		super();
+	}
 
+	public PaymentEntity(String description, LocalDate date, Double amount, EcommerceEntity ecommerce) {
+		super();
+		this.description = description;
+		this.date = date;
+		this.amount = amount;
+		this.ecommerce = ecommerce;
+	}
 
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
 
 	public Integer getId() {
 		return id;

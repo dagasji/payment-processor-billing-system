@@ -17,7 +17,7 @@ import javax.validation.constraints.*;
  */
 @ApiModel(description = "This is Payment Processor model")
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-03T11:30:25.428+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-04T11:27:20.173+01:00")
 
 
 public class PaymentProcessorDetail   {
@@ -28,7 +28,7 @@ public class PaymentProcessorDetail   {
   private String name = null;
 
   @JsonProperty("flatfee")
-  private String flatfee = null;
+  private Float flatfee = null;
 
   @JsonProperty("listAPP")
   @Valid
@@ -75,7 +75,7 @@ public class PaymentProcessorDetail   {
     this.name = name;
   }
 
-  public PaymentProcessorDetail flatfee(String flatfee) {
+  public PaymentProcessorDetail flatfee(Float flatfee) {
     this.flatfee = flatfee;
     return this;
   }
@@ -87,11 +87,11 @@ public class PaymentProcessorDetail   {
   @ApiModelProperty(value = "Commission for each transaction")
 
 
-  public String getFlatfee() {
+  public Float getFlatfee() {
     return flatfee;
   }
 
-  public void setFlatfee(String flatfee) {
+  public void setFlatfee(Float flatfee) {
     this.flatfee = flatfee;
   }
 

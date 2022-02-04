@@ -1,6 +1,8 @@
 package es.danielgaspar.ppbs.api;
 
 
+import java.util.stream.Stream;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -91,6 +93,7 @@ public class EcommerceApiTest {
 		Assert.assertEquals(nameUpdate, this.ecommerceApi.updateEcommerce(ecomerceDetail.getId(), ecomerce).getBody().getName());
 		
 	} 
+	
 	
 
 	

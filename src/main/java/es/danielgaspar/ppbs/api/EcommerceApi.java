@@ -103,11 +103,11 @@ public interface EcommerceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/ecommerce/{id}/report/{month}",
-        produces = { "*/*" }, 
-        consumes = { "application/json" },
+    @RequestMapping(value = "/ecommerce/{id}/report/{year}/{month}",
+        produces = { "application/json" }, 
+        consumes = { "*/*" },
         method = RequestMethod.GET)
-    ResponseEntity<EcommerceReport> reportEcommerce(@ApiParam(value = "id",required=true) @PathVariable("id") String id,@ApiParam(value = "",required=true) @PathVariable("month") String month);
+    ResponseEntity<EcommerceReport> reportEcommerce(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id,@ApiParam(value = "",required=true) @PathVariable("year") Integer year,@ApiParam(value = "",required=true) @PathVariable("month") Integer month);
 
 
     @ApiOperation(value = "Update ecommerce", nickname = "updateEcommerce", notes = "", response = EcommerceDetail.class, tags={ "ecommerce", })

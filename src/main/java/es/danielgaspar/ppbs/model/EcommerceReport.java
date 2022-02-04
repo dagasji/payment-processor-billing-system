@@ -3,8 +3,11 @@ package es.danielgaspar.ppbs.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import es.danielgaspar.ppbs.model.Transactions;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -13,7 +16,7 @@ import javax.validation.constraints.*;
  * EcommerceReport
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-03T11:30:25.428+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-04T11:43:54.244+01:00")
 
 
 public class EcommerceReport   {
@@ -21,10 +24,14 @@ public class EcommerceReport   {
   private String ecommerceName = null;
 
   @JsonProperty("month")
-  private Integer month = null;
+  private String month = null;
 
   @JsonProperty("paymentProcessorName")
   private String paymentProcessorName = null;
+
+  @JsonProperty("listTransactions")
+  @Valid
+  private List<Transactions> listTransactions = null;
 
   public EcommerceReport ecommerceName(String ecommerceName) {
     this.ecommerceName = ecommerceName;
@@ -46,7 +53,7 @@ public class EcommerceReport   {
     this.ecommerceName = ecommerceName;
   }
 
-  public EcommerceReport month(Integer month) {
+  public EcommerceReport month(String month) {
     this.month = month;
     return this;
   }
@@ -58,11 +65,11 @@ public class EcommerceReport   {
   @ApiModelProperty(value = "Month")
 
 
-  public Integer getMonth() {
+  public String getMonth() {
     return month;
   }
 
-  public void setMonth(Integer month) {
+  public void setMonth(String month) {
     this.month = month;
   }
 
@@ -86,6 +93,35 @@ public class EcommerceReport   {
     this.paymentProcessorName = paymentProcessorName;
   }
 
+  public EcommerceReport listTransactions(List<Transactions> listTransactions) {
+    this.listTransactions = listTransactions;
+    return this;
+  }
+
+  public EcommerceReport addListTransactionsItem(Transactions listTransactionsItem) {
+    if (this.listTransactions == null) {
+      this.listTransactions = new ArrayList<Transactions>();
+    }
+    this.listTransactions.add(listTransactionsItem);
+    return this;
+  }
+
+  /**
+   * Get listTransactions
+   * @return listTransactions
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public List<Transactions> getListTransactions() {
+    return listTransactions;
+  }
+
+  public void setListTransactions(List<Transactions> listTransactions) {
+    this.listTransactions = listTransactions;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -98,12 +134,13 @@ public class EcommerceReport   {
     EcommerceReport ecommerceReport = (EcommerceReport) o;
     return Objects.equals(this.ecommerceName, ecommerceReport.ecommerceName) &&
         Objects.equals(this.month, ecommerceReport.month) &&
-        Objects.equals(this.paymentProcessorName, ecommerceReport.paymentProcessorName);
+        Objects.equals(this.paymentProcessorName, ecommerceReport.paymentProcessorName) &&
+        Objects.equals(this.listTransactions, ecommerceReport.listTransactions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(ecommerceName, month, paymentProcessorName);
+    return Objects.hash(ecommerceName, month, paymentProcessorName, listTransactions);
   }
 
   @Override
@@ -114,6 +151,7 @@ public class EcommerceReport   {
     sb.append("    ecommerceName: ").append(toIndentedString(ecommerceName)).append("\n");
     sb.append("    month: ").append(toIndentedString(month)).append("\n");
     sb.append("    paymentProcessorName: ").append(toIndentedString(paymentProcessorName)).append("\n");
+    sb.append("    listTransactions: ").append(toIndentedString(listTransactions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

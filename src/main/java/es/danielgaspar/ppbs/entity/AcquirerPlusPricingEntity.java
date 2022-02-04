@@ -13,6 +13,20 @@ import javax.persistence.Table;
 @Table(name="ACQUIRER_PLUS_PRICING")
 public class AcquirerPlusPricingEntity {
 	
+	public AcquirerPlusPricingEntity() {
+		super();
+	}
+	
+	
+	
+	public AcquirerPlusPricingEntity(Integer volumen, Float app) {
+		super();
+		this.volumen = volumen;
+		this.app = app;
+	}
+
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_ACQUIRER_PLUS_PRICING")

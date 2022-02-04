@@ -117,14 +117,11 @@ public class EcommerceApiController implements EcommerceApi {
     }
 
     
-    public ResponseEntity<EcommerceReport> reportEcommerce(@ApiParam(value = "id",required=true) @PathVariable("id") String id,@ApiParam(value = "",required=true) @PathVariable("month") String month) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("")) {
-            
-        	//this.service.delete(id);
-        }
+    public ResponseEntity<EcommerceReport> reportEcommerce(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id,@ApiParam(value = "",required=true) @PathVariable("year") Integer year,@ApiParam(value = "",required=true) @PathVariable("month") Integer month) {
+       
+    	EcommerceReport report = this.service.ecommerceReport(id, year, month);
 
-        return new ResponseEntity<EcommerceReport>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<EcommerceReport>(report, HttpStatus.OK);
     }
 
 
