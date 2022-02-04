@@ -10,15 +10,15 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-01T18:38:32.127+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-04T11:43:54.244+01:00")
 
 @Configuration
 public class SwaggerDocumentationConfig {
 
     ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("This is title for siddhu swagger example")
-            .description("This is siddhu description swagger example")
+            .title("Payment Processor Billing System")
+            .description("Payment Processor Billing System")
             .license("")
             .licenseUrl("http://unlicense.org")
             .termsOfServiceUrl("")
