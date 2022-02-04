@@ -15,8 +15,10 @@ import es.danielgaspar.ppbs.entity.EcommerceEntity;
 import es.danielgaspar.ppbs.entity.PaymentEntity;
 import es.danielgaspar.ppbs.entity.PaymentProcessorEntity;
 import es.danielgaspar.ppbs.model.APP;
+import es.danielgaspar.ppbs.model.EcommerceBilling;
 import es.danielgaspar.ppbs.model.EcommerceReport;
 import es.danielgaspar.ppbs.model.PaymentProcessorDetail;
+import es.danielgaspar.ppbs.model.PaymentProcessorReport;
 import es.danielgaspar.ppbs.repositoy.PaymentRepository;
 
 @Service
@@ -96,6 +98,42 @@ public class PaymentProcessorServiceImpl extends GeneralServiceImpl<PaymentProce
 		}
 
 		return entity;
+	}
+	
+	
+	public PaymentProcessorReport report(Integer id) {
+		
+		PaymentProcessorReport report = new PaymentProcessorReport();
+		
+		//Get payment repository
+		PaymentProcessorEntity paymentProcessor =  this.getRepo().findOne(id);
+		report.setPaymentProcessorName(paymentProcessor.getName());
+		
+		List<EcommerceEntity> listEcommerce = paymentProcessor.getListEntity();
+		
+		//Create the EcommerceBilling
+		List<EcommerceBilling> listEcommerceBilling = new ArrayList<EcommerceBilling>();
+		
+		//Iterate in ecommerce entity
+		for (EcommerceEntity ecommerceEntity : listEcommerce) {
+			
+			//Find all payment for the ecommerce
+			List<PaymentEntity> listPayment = paymentRepository.findByEcommerce(ecommerceEntity);
+			
+			//Calculate total amount of transaction
+			Double amountTotal = listPayment.stream().mapToDouble(o->o.getAmount()).sum(); 
+			
+			EcommerceBilling billing = new EcommerceBilling();
+			billing.amount(amountTotal);
+			billing.setEcommerceName(ecommerceEntity.getName());
+			listEcommerceBilling.add(billing);
+			
+			
+		}
+		
+		report.setListEcommerce(listEcommerceBilling);
+		
+		return report;
 	}
 	
 	

@@ -12,5 +12,7 @@ public interface PaymentRepository extends CrudRepository<PaymentEntity, Integer
 	
 	List<PaymentEntity> findByDateBetweenAndEcommerce(LocalDate dateInit,
 			LocalDate dateEnd, EcommerceEntity ecommerce);
+	
+	List<PaymentEntity> findByEcommerce(EcommerceEntity ecommerce);
 
 }

@@ -5,24 +5,23 @@
  */
 package es.danielgaspar.ppbs.api;
 
-import es.danielgaspar.ppbs.model.EcommerceReport;
-import es.danielgaspar.ppbs.model.PaymentProcessor;
-import es.danielgaspar.ppbs.model.PaymentProcessorDetail;
-import io.swagger.annotations.*;
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
-import javax.validation.constraints.*;
-import java.util.List;
+import es.danielgaspar.ppbs.model.PaymentProcessor;
+import es.danielgaspar.ppbs.model.PaymentProcessorDetail;
+import es.danielgaspar.ppbs.model.PaymentProcessorReport;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-02-03T16:56:52.396+01:00")
 
 @Validated
@@ -68,18 +67,17 @@ public interface PaymentprocessorApi {
     ResponseEntity<PaymentProcessorDetail> getPaymentProcessor(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id);
 
 
-    @ApiOperation(value = "Report monthly", nickname = "reportPaymentProcessor", notes = "", response = EcommerceReport.class, tags={ "Payment Processor", })
+    @ApiOperation(value = "Report monthly", nickname = "reportPaymentProcessor", notes = "", response = PaymentProcessorReport.class, tags={ "Payment Processor", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = EcommerceReport.class),
+        @ApiResponse(code = 200, message = "OK", response = PaymentProcessorReport.class),
         @ApiResponse(code = 201, message = "Created"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
     @RequestMapping(value = "/paymentprocessor/{id}/report",
         produces = { "application/json" }, 
-        consumes = { "application/json" },
         method = RequestMethod.GET)
-    ResponseEntity<EcommerceReport> reportPaymentProcessor(@ApiParam(value = "id",required=true) @PathVariable("id") String id);
+    ResponseEntity<PaymentProcessorReport> reportPaymentProcessor(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id);
 
 
     @ApiOperation(value = "Update Payment Processor", nickname = "updatePaymentProcessor", notes = "", response = PaymentProcessorDetail.class, tags={ "Payment Processor", })
