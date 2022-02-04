@@ -1,6 +1,5 @@
 package es.danielgaspar.ppbs.service;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.time.temporal.TemporalAdjusters;
@@ -9,6 +8,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ import es.danielgaspar.ppbs.model.EcommerceDetail;
 import es.danielgaspar.ppbs.model.EcommerceReport;
 import es.danielgaspar.ppbs.model.Payment;
 import es.danielgaspar.ppbs.model.Transactions;
+import es.danielgaspar.ppbs.repositoy.PaymentProcessorRepository;
 import es.danielgaspar.ppbs.repositoy.PaymentRepository;
 import es.danielgaspar.ppbs.utils.ReportUtils;
 
@@ -34,6 +36,10 @@ public class EcommerceServiceImpl extends GeneralServiceImpl<EcommerceEntity, Ec
 	
 	@Autowired
 	private PaymentRepository paymentRepository;
+	
+	@Autowired
+	private PaymentProcessorRepository paymentProcessorRepository;
+
 
 	@Override
 	protected EcommerceDetail entityToModel(EcommerceEntity entity) {
@@ -137,6 +143,7 @@ public class EcommerceServiceImpl extends GeneralServiceImpl<EcommerceEntity, Ec
 	 * @param month report month
 	 * @return EcommerceReport
 	 */
+	@Transactional
 	public EcommerceReport ecommerceReport(Integer idEcommerce, Integer year, Integer month) {
 		
 		//Get Ecommerce
@@ -177,7 +184,10 @@ public class EcommerceServiceImpl extends GeneralServiceImpl<EcommerceEntity, Ec
 			
 			listTransactions = new ArrayList<Transactions>();
 			
-			List<AcquirerPlusPricingEntity> listApp = ecommerce.getPaymentProcessor().getListApp();
+			PaymentProcessorEntity paymentProcessor = paymentProcessorRepository.findOne(ecommerce.getPaymentProcessor().getId());
+			
+			//Get the list app configure for the payment processor
+			List<AcquirerPlusPricingEntity> listApp = paymentProcessor.getListApp();
 			
 			//Group by day
 			Map<Integer, List<PaymentEntity>> mapGroupByDay = list.stream()
@@ -193,7 +203,7 @@ public class EcommerceServiceImpl extends GeneralServiceImpl<EcommerceEntity, Ec
 				
 				Integer numTransactions = listDay.size();
 				
-				//Get the correct app to apply
+				//Get the correct app to apply for transaction number
 				AcquirerPlusPricingEntity app = ReportUtils.calculateApp(numTransactions, listApp);
 				
 				//sum amount
@@ -202,7 +212,7 @@ public class EcommerceServiceImpl extends GeneralServiceImpl<EcommerceEntity, Ec
 				//Calculate the total amount + tax
 				Double totalWithTax = amountTotal + 
 						(amountTotal * app.getApp() / 100) + 
-						(ecommerce.getPaymentProcessor().getFlatfee() * numTransactions) ;
+						(paymentProcessor.getFlatfee() * numTransactions) ;
 				
 				log.info("Day: " + day + " totalAmount: " + totalWithTax);
 				
