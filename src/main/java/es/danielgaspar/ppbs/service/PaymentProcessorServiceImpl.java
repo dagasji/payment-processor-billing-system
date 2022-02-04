@@ -7,15 +7,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.danielgaspar.ppbs.api.EcommerceApiController;
 import es.danielgaspar.ppbs.entity.AcquirerPlusPricingEntity;
 import es.danielgaspar.ppbs.entity.EcommerceEntity;
 import es.danielgaspar.ppbs.entity.PaymentEntity;
 import es.danielgaspar.ppbs.entity.PaymentProcessorEntity;
 import es.danielgaspar.ppbs.model.APP;
 import es.danielgaspar.ppbs.model.EcommerceBilling;
+import es.danielgaspar.ppbs.model.EcommerceDetail;
 import es.danielgaspar.ppbs.model.EcommerceReport;
 import es.danielgaspar.ppbs.model.PaymentProcessorDetail;
 import es.danielgaspar.ppbs.model.PaymentProcessorReport;
@@ -24,6 +28,8 @@ import es.danielgaspar.ppbs.repositoy.PaymentRepository;
 @Service
 public class PaymentProcessorServiceImpl extends GeneralServiceImpl<PaymentProcessorEntity, PaymentProcessorDetail>	
 	implements PaymentProcessorService{
+	
+	private static final Logger log = LoggerFactory.getLogger(PaymentProcessorServiceImpl.class);
 	
 	@Autowired
 	private PaymentRepository paymentRepository;
@@ -64,7 +70,20 @@ public class PaymentProcessorServiceImpl extends GeneralServiceImpl<PaymentProce
 	@Override
 	protected List<PaymentProcessorDetail> listEntityToModel(List<PaymentProcessorEntity> listEntity) {
 		
-		return null;
+		List<PaymentProcessorDetail> listPaymentProcessorModel = null;
+		
+		if (listEntity != null) {
+			
+			listPaymentProcessorModel = new ArrayList<PaymentProcessorDetail>();
+		
+			for (PaymentProcessorEntity entity : listEntity) {
+				
+				listPaymentProcessorModel.add(entityToModel(entity));
+			}
+		
+		}
+		
+		return listPaymentProcessorModel;
 	}
 
 	@Override
@@ -103,9 +122,12 @@ public class PaymentProcessorServiceImpl extends GeneralServiceImpl<PaymentProce
 	
 	public PaymentProcessorReport report(Integer id) {
 		
+		log.debug("Init report(). id: {}", id);
+		
 		PaymentProcessorReport report = new PaymentProcessorReport();
 		
 		//Get payment repository
+		log.debug("Find payment processor. Id", id);
 		PaymentProcessorEntity paymentProcessor =  this.getRepo().findOne(id);
 		report.setPaymentProcessorName(paymentProcessor.getName());
 		
@@ -132,6 +154,8 @@ public class PaymentProcessorServiceImpl extends GeneralServiceImpl<PaymentProce
 		}
 		
 		report.setListEcommerce(listEcommerceBilling);
+		
+		log.debug("Init report()");
 		
 		return report;
 	}

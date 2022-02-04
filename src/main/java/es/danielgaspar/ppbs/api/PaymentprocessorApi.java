@@ -5,6 +5,8 @@
  */
 package es.danielgaspar.ppbs.api;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -54,6 +56,17 @@ public interface PaymentprocessorApi {
         method = RequestMethod.DELETE)
     ResponseEntity<PaymentProcessorDetail> deletePaymentProcessor(@ApiParam(value = "id",required=true) @PathVariable("id") Integer id);
 
+    @ApiOperation(value = "Get all Payment Processor", nickname = "getAllPaymentProcessor", notes = "", response = PaymentProcessorDetail.class, responseContainer = "List", tags={ "Payment Processor", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = PaymentProcessorDetail.class, responseContainer = "List"),
+        @ApiResponse(code = 204, message = "No Content"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/paymentprocessor",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    ResponseEntity<List<PaymentProcessorDetail>> getAllPaymentProcessor();
 
     @ApiOperation(value = "Get Payment Processor detail", nickname = "getPaymentProcessor", notes = "", response = PaymentProcessorDetail.class, tags={ "Payment Processor", })
     @ApiResponses(value = { 
