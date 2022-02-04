@@ -4,8 +4,8 @@ Spring Boot Server
 
 ##Execute
 
-mvn clean install
-mvn spring-boot:run
+	mvn clean install
+	mvn spring-boot:run
 
 Another posibility is execute the main method of class:.
 
