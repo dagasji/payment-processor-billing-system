@@ -30,7 +30,8 @@ public class PaymentRepositortyTest {
 	public void testFindByDate() {
 		
 		//Create Ecommerce
-		EcommerceEntity ecommerce = new EcommerceEntity(1, "Test Ecommerce");
+		EcommerceEntity ecommerce = new EcommerceEntity();
+		ecommerce.setName("Test Ecommerce");
 		ecommerceRepository.save(ecommerce);
 		
 		//Create 
